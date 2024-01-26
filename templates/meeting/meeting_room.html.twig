@@ -1,0 +1,175 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New User{% endblock %}
+
+{% block body %}
+
+    <!-- Your other head elements -->
+
+    <style>
+
+
+        .room-wrapper {
+            height: 100vh;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .menu-toggle {
+            font-size: 2em;
+            width: 50px;
+            height: 50px;
+            text-align: center;
+            line-height: 50px;
+            display: block;
+            opacity: 0.5;
+            cursor: pointer;
+            position: absolute;
+            top: 13%;
+            left: 0;
+            z-index: 2; /* Ensure menu is in the foreground */
+
+            background-color: #A32C30FF;
+            border-bottom: 2px solid black;
+            color: white;
+            transition: transform 0.6s ease, background-color 0.1s 0.15s ease;
+            transform-origin: left center;
+            text-decoration: none;
+        }
+
+        .menu-toggle:hover {
+            opacity: 1;
+        }
+
+        .menu {
+            position: absolute;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            transition: all 0.3s ease;
+            pointer-events: none;
+            z-index: 1; /* Behind #root */
+        }
+
+        .item {
+            background-color: #A32C30FF;
+            border-bottom: 2px solid black;
+            color: white;
+            width: 50px;
+            height: 50px;
+            line-height: 45px;
+            display: block;
+            text-align: center;
+            transition: transform 0.6s ease, background-color 0.1s 0.15s ease;
+            transform-origin: left center;
+            position: relative;
+            text-decoration: none;
+            font-size: 2em;
+
+            &:active {
+                background-color: rgba(32, 38, 44, 0.82);
+                color: white;
+                transition: all ease 0.2s;
+            }
+        }
+
+        .menu--is-closed .item {
+            transform: rotateY(180deg);
+            background-color: #272841;
+        }
+
+
+        #root {
+            flex: 1; /* Take up remaining space */
+            /*padding: 20px; !* Adjust as needed *!*/
+            z-index: 0; /* Behind menu */
+        }
+    </style>
+
+    <script>
+        function toggleMenu() {
+            var menu = document.getElementById('menu');
+            menu.classList.toggle('menu--is-closed');
+        }
+    </script>
+
+    <div class="room-wrapper">
+        <li class="menu-toggle" onclick="toggleMenu()">
+            <i class="fa fa-angle-right" aria-hidden="true"></i>
+        </li>
+
+        <ul id="menu" class="menu menu--is-closed">
+
+            <li>
+                <a href="#" class="item">
+                    <span class="iconify" data-icon="majesticons:home-line" data-width="35" data-height="35"></span>
+                </a>
+            </li>
+            <li>
+                <a class="item">
+                    <span class="iconify" data-icon="humbleicons:arrow-go-back"></span>
+                </a>
+            </li>
+        </ul>
+
+        <!-- Your Zego Cloud SDK script and other content -->
+        <div id="root"></div>
+
+        <script src="https://unpkg.com/@zegocloud/zego-uikit-prebuilt/zego-uikit-prebuilt.js"></script>
+        <script>
+            window.onload = function () {
+                function getUrlParams(url) {
+                    let urlStr = url.split('?')[1];
+                    const urlSearchParams = new URLSearchParams(urlStr);
+                    const result = Object.fromEntries(urlSearchParams.entries());
+                    return result;
+                }
+
+
+                // Generate a Token by calling a method.
+                // @param 1: appID
+                // @param 2: serverSecret
+                // @param 3: Room ID
+                // @param 4: User ID
+                // @param 5: Username
+                const roomID = "{{ roomId }}";
+                const userID = {{ app.user.id }} +"";
+                const userName = "{{ app.user.username }}";
+                const appID = 1530984834;
+                const serverSecret = "4a2b917108fb6aa61bee3531ec76e8d1";
+                const kitToken = ZegoUIKitPrebuilt.generateKitTokenForTest(appID, serverSecret, roomID, userID, userName);
+
+
+                const zp = ZegoUIKitPrebuilt.create(kitToken);
+                zp.joinRoom({
+                    container: document.querySelector("#root"),
+                    sharedLinks: [{
+                        name: 'Personal link',
+                        url: window.location.protocol + '//' + window.location.host + window.location.pathname + '?roomID=' + roomID,
+                    }],
+                    scenario: {
+                        mode: ZegoUIKitPrebuilt.VideoConference,
+                    },
+
+                    turnOnMicrophoneWhenJoining: true,
+                    turnOnCameraWhenJoining: true,
+                    showMyCameraToggleButton: true,
+                    showMyMicrophoneToggleButton: true,
+                    showAudioVideoSettingsButton: true,
+                    showScreenSharingButton: true,
+                    showTextChat: true,
+                    showUserList: true,
+                    maxUsers: 50,
+                    layout: "Auto",
+                    showLayoutButton: true,
+
+                });
+            }
+        </script>
+    </div>
+
+
+
+{% endblock %}
