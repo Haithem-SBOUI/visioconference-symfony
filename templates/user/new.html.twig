@@ -4,8 +4,69 @@
 
 {% block body %}
     <h1>Create new User</h1>
+<div class="container ">
+    <div class="row  justify-content-center">
+        <div class="col-md-6 card custom-card2 shadow bg-body-tertiary border border-top p-3 mb-5">
+            <div class="card-body">
+                <h2 class="text-center mb-5">Register</h2>
 
     {{ include('user/_form.html.twig') }}
+                <h2 class="text-center mb-5">Register</h2>
 
     <a href="{{ path('app_user_index') }}">back to list</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <div class="container ">
+        <div class="row  justify-content-center">
+            <div class="col-md-6 card custom-card2 shadow bg-body-tertiary p-3 mb-5">
+                <div class="card-body">
+                    <h2 class="text-center mb-5">Register</h2>
+                    <form class="" action="" method="post">
+                        <!--          username-->
+                        <div class="form-floating mb-3">
+                            <input type="email" class="form-control mb-2" id="fUsername" placeholder="">
+                            <label for="fUsername">Username</label>
+                        </div>
+                        <!--          firstname and lastname -->
+                        <div class="row  mb-2">
+                            <div class="col-md-6 form-floating mb-3">
+                                <input  type="text" class="form-control" id="fFirstname" placeholder="">
+                                <label for="fFirstname" class="ms-3">Firstname</label>
+                            </div>
+                            <div class="col-md-6 form-floating mb-3">
+                                <input  type="text" class="form-control" id="fLastname" placeholder="">
+                                <label for="fLastname" class="ms-3">Lastname</label>
+                            </div>
+                        </div>
+                        <!--          email-->
+                        <div class="form-floating mb-3">
+                            <input type="email" class="form-control mb-2" id="fEmail" placeholder="">
+                            <label for="fEmail">Email address</label>
+                        </div>
+                        <!--          password-->
+                        <div class="row  mb-2">
+                            <div class="col-md-6 form-floating mb-3">
+                                <input  type="password" class="form-control mb-2" id="fPassword1" placeholder="">
+                                <label for="fPassword1" class="ms-3">Password</label>
+                            </div>
+                            <div class="col-md-6 form-floating mb-3">
+                                <input type="password" class="form-control mb-2" id="fPassword2" placeholder="">
+                                <label for="fPassword2" class="ms-3">Confirm Password</label>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn custom-btn2 mt-4 mb-2">Register</button>
+                        <a class="ms-2" routerLink="/login"> You have already an account, login</a>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
 {% endblock %}

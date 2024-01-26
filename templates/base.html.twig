@@ -1,18 +1,37 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
-        {% block stylesheets %}
-            <link rel="stylesheet" href="{{ asset('styles/app.css') }}">
-        {% endblock %}
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Welcome!{% endblock %}</title>
+    <link rel="icon"
+          href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
+    {% block stylesheets %}
+        <link rel="stylesheet" href="{{ asset('styles/app.css') }}">
 
-        {% block javascripts %}
-            {{ importmap() }}
-        {% endblock %}
-    </head>
-    <body>
-        {% block body %}{% endblock %}
-    </body>
+        {#            personalized css #}
+        <link rel="stylesheet" href="{{ asset('styles/my.css') }}">
+
+
+        <link rel="stylesheet" href="{{ asset('styles/css/fontawesome.css') }}">
+
+        <link rel="stylesheet" href="{{ asset('styles/css/templatemo-edu-meeting.css') }}">
+        <link rel="stylesheet" href="{{ asset('styles/css/owl.css') }}">
+        <link rel="stylesheet" href="{{ asset('styles/css/lightbox.css') }}">
+
+        <!--admin-->
+        <link rel="stylesheet" href="{{ asset('styles/admin/css/vendor.css') }}">
+        <link rel="stylesheet" href="{{ asset('styles/admin/bootstrap/css/bootstrap.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('styles/admin/fonts/fontawesome-all.min.css') }}">
+
+
+
+    {% endblock %}
+
+    {% block javascripts %}
+        {{ importmap() }}
+    {% endblock %}
+</head>
+<body>
+{% block body %}{% endblock %}
+</body>
 </html>

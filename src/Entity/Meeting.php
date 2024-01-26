@@ -16,10 +16,9 @@ use Symfony\UX\Turbo\Attribute\Broadcast;
 class Meeting
 {
     #[ORM\Id]
-    #[ORM\Column(type: UuidType::NAME, unique: true)]
-    #[ORM\GeneratedValue(strategy: 'CUSTOM')]
-    #[ORM\CustomIdGenerator(class: 'doctrine.uuid_generator')]
-    private ?Uuid $id;
+    #[ORM\GeneratedValue]
+    #[ORM\Column]
+    private ?int $id;
 
 
     #[ORM\Column(length: 255)]
