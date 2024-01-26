@@ -3,113 +3,33 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
-use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\UX\Turbo\Attribute\Broadcast;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
-#[Broadcast]
-class User
+class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
 
-
-
-    #[ORM\Column(length: 255)]
-    private ?string $username = null;
-
-    #[ORM\Column(length: 255)]
-    private ?string $firstname = null;
-
-    #[ORM\Column(length: 255)]
-    private ?string $lastname = null;
-
-    #[ORM\Column(length: 255)]
-    private ?string $password = null;
-
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 180, unique: true)]
     private ?string $email = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $role = null;
+    #[ORM\Column]
+    private array $roles = [];
 
-    #[ORM\Column(length: 255)]
-    private ?string $status = null;
-
-    #[ORM\Column(length: 255)]
-    private ?string $createdOn = null;
-
-    #[ORM\Column(length: 255)]
-    private ?string $updatedOn = null;
-
-    #[ORM\ManyToMany(targetEntity: Meeting::class, mappedBy: 'organizer')]
-    private Collection $meetings;
-
-    
-
-    public function __construct()
-    {
-        $this->meetings = new ArrayCollection();
-    }
+    /**
+     * @var string The hashed password
+     */
+    #[ORM\Column]
+    private ?string $password = null;
 
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-
-
-    public function getUsername(): ?string
-    {
-        return $this->username;
-    }
-
-    public function setUsername(string $username): static
-    {
-        $this->username = $username;
-
-        return $this;
-    }
-
-    public function getFirstname(): ?string
-    {
-        return $this->firstname;
-    }
-
-    public function setFirstname(string $firstname): static
-    {
-        $this->firstname = $firstname;
-
-        return $this;
-    }
-
-    public function getLastname(): ?string
-    {
-        return $this->lastname;
-    }
-
-    public function setLastname(string $lastname): static
-    {
-        $this->lastname = $lastname;
-
-        return $this;
-    }
-
-    public function getPassword(): ?string
-    {
-        return $this->password;
-    }
-
-    public function setPassword(string $password): static
-    {
-        $this->password = $password;
-
-        return $this;
     }
 
     public function getEmail(): ?string
@@ -124,80 +44,56 @@ class User
         return $this;
     }
 
-    public function getRole(): ?string
+    /**
+     * A visual identifier that represents this user.
+     *
+     * @see UserInterface
+     */
+    public function getUserIdentifier(): string
     {
-        return $this->role;
+        return (string) $this->email;
     }
 
-    public function setRole(string $role): static
+    /**
+     * @see UserInterface
+     */
+    public function getRoles(): array
     {
-        $this->role = $role;
+        $roles = $this->roles;
+        // guarantee every user at least has ROLE_USER
+        $roles[] = 'ROLE_USER';
 
-        return $this;
+        return array_unique($roles);
     }
 
-    public function getStatus(): ?string
+    public function setRoles(array $roles): static
     {
-        return $this->status;
-    }
-
-    public function setStatus(string $status): static
-    {
-        $this->status = $status;
-
-        return $this;
-    }
-
-    public function getCreatedOn(): ?string
-    {
-        return $this->createdOn;
-    }
-
-    public function setCreatedOn(string $createdOn): static
-    {
-        $this->createdOn = $createdOn;
-
-        return $this;
-    }
-
-    public function getUpdatedOn(): ?string
-    {
-        return $this->updatedOn;
-    }
-
-    public function setUpdatedOn(string $updatedOn): static
-    {
-        $this->updatedOn = $updatedOn;
+        $this->roles = $roles;
 
         return $this;
     }
 
     /**
-     * @return Collection<int, Meeting>
+     * @see PasswordAuthenticatedUserInterface
      */
-    public function getMeetings(): Collection
+    public function getPassword(): string
     {
-        return $this->meetings;
+        return $this->password;
     }
 
-    public function addMeeting(Meeting $meeting): static
+    public function setPassword(string $password): static
     {
-        if (!$this->meetings->contains($meeting)) {
-            $this->meetings->add($meeting);
-            $meeting->addOrganizer($this);
-        }
+        $this->password = $password;
 
         return $this;
     }
 
-    public function removeMeeting(Meeting $meeting): static
+    /**
+     * @see UserInterface
+     */
+    public function eraseCredentials(): void
     {
-        if ($this->meetings->removeElement($meeting)) {
-            $meeting->removeOrganizer($this);
-        }
-
-        return $this;
+        // If you store any temporary, sensitive data on the user, clear it here
+        // $this->plainPassword = null;
     }
-
-
 }
