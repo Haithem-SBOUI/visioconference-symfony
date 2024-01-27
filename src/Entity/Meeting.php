@@ -40,6 +40,10 @@ class Meeting
     #[ORM\Column(nullable: true)]
     private ?string $imageName = null;
 
+    #[ORM\ManyToOne(inversedBy: 'meetings')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $user = null;
+
 
 
     public function getId(): ?int
@@ -143,6 +147,18 @@ class Meeting
     public function getImageName(): ?string
     {
         return $this->imageName;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): static
+    {
+        $this->user = $user;
+
+        return $this;
     }
 
 }

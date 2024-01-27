@@ -3,11 +3,31 @@
 {% block title %}Edit Meeting{% endblock %}
 
 {% block body %}
-    <h1>Edit Meeting</h1>
+    {% include 'shared/navbar.html.twig' %}
 
-    {{ include('meeting/_form.html.twig', {'button_label': 'Update'}) }}
 
-    <a href="{{ path('app_meeting_index') }}">back to list</a>
+<style>
+    img {
+        max-width: 250px ;
+        max-height: 250px;
+        border-radius: 10%;
+        border-bottom: 7px solid var(--main-color);
+    }
+</style>
 
-    {{ include('meeting/_delete_form.html.twig') }}
+    <section class="meetings-page" id="meetings">
+        <div class="container d-flex justify-content-center">
+            <!--create meeting -->
+            <div class="col-md-6 card shadow bg-body-tertiary p-3 me-5 mb-5">
+                <div class="card-body ">
+                    <h2 class="mb-5">Edit Meeting</h2>
+                    {{ include('meeting/_form.html.twig', {'button_label': 'Update'}) }}
+
+                    <a href="{{ path('app_meeting_index') }}">back to list</a>
+
+                    {{ include('meeting/_delete_form.html.twig') }}
+                </div>
+            </div>
+        </div>
+    </section>
 {% endblock %}

@@ -18,9 +18,8 @@ class MeetingController extends AbstractController
     #[Route('/', name: 'app_meeting_index', methods: ['GET'])]
     public function index(MeetingRepository $meetingRepository): Response
     {
-        return $this->render('meeting/index.html.twig', [
-            'meetings' => $meetingRepository->findAll(),
-        ]);
+        return $this->redirectToRoute('app_meeting_public');
+
     }
 
     #[Route('/public-meetings', name: 'app_meeting_public', methods: ['GET'])]
@@ -41,6 +40,7 @@ class MeetingController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $meeting->setUser($this->getUser());
             $entityManager->persist($meeting);
             $entityManager->flush();
 

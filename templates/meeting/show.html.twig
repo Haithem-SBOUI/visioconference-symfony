@@ -1,79 +1,67 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Meeting{% endblock %}
+{% block title %}Meeting index{% endblock %}
 
 {% block body %}
+
+    {% include 'shared/navbar.html.twig' %}
 
     <p>meeting-details works!</p>
     <section class="heading-page header-text" id="top">
         <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <h6>Get all details</h6>
-                    <h2>Online Teaching and Learning Tools</h2>
-                </div>
+
+            <div class="col-md-6 mx-auto">
+                <h6>Get all details</h6>
+                <h2>{{ meeting.title }}</h2>
             </div>
         </div>
+
     </section>
 
     <section class="meetings-page" id="meetings">
         <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <div class="meeting-single-item">
-                                <div class="thumb">
-                                    <div class="price">
-                                        <button type="button" class="btn custom-btn1" href="{{ path('app_meeting_edit', {'id': meeting.id}) }}"><span class="iconify" data-icon="ic:outline-edit" data-width="30" data-height="30"></span></button>
-                                    </div>
-                                    <div class="date">
-                                        <h6>Nov <span>12</span></h6>
-                                    </div>
-                                    <a href="meeting-details.html">
-                                        <img src="{{ vich_uploader_asset( meeting, 'fileName') }}" alt="Profile Image">
-                                </div>
-                                <div class="down-content">
-                                    <a href="meeting-details.html"><h4>{{ meeting.title }}</h4></a>
-                                    <p>{{ meeting.dateTime ? meeting.dateTime|date('Y-m-d H:i:s') : '' }}</p>
-                                    <p class="description">
-                                        {{ meeting.description }}
-                                    </p>
-                                    <!--                todo: complete the details page content-->
-                                    <div class="row">
-                                        <div class="col-lg-4">
-                                            <div class="hours">
-                                                <h5>Hours</h5>
-                                                <p>Monday - Friday: 07:00 AM - 13:00 PM<br>Saturday- Sunday: 09:00 AM - 15:00 PM</p>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-4">
-                                            <div class="location">
-                                                <h5>Location</h5>
-                                                <p>Recreio dos Bandeirantes,
-                                                    <br>Rio de Janeiro - RJ, 22795-008, Brazil</p>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-4">
-                                            <div class="book now">
-                                                <h5>Book Now</h5>
-                                                <p>010-020-0340<br>090-080-0760</p>
-                                            </div>
+
+            <div class="col-lg-6 mx-auto ">
+                <div class="meeting-single-item">
+                    <div class="thumb">
+                        <div class="price">
+                            <a type="button" class="btn custom-btn1"
+                               href="{{ path('app_meeting_edit', {'id': meeting.id}) }}"><span
+                                        class="iconify" data-icon="ic:outline-edit" data-width="30"
+                                        data-height="30"></span></a>
+                        </div>
+                        <div class="date">
+                            <h6>Nov <span>12</span></h6>
+                        </div>
+                        <a href="meeting-details.html">
+                            <img src="{{ vich_uploader_asset( meeting ) }}" alt="Profile Image">
+
+                            <div class="down-content">
+                                <a href="meeting-details.html"><h4>{{ meeting.title }}</h4></a>
+                                <p>{{ meeting.dateTime ? meeting.dateTime|date('Y-m-d H:i:s') : '' }}</p>
+                                <p class="description">
+                                    {{ meeting.description }}
+                                </p>
+
+                                <div class="row ">
+
+                                    <div class="col-lg-8 mx-auto">
+                                        <div class="main-button-red">
+                                            <a class="btn custom-btn1 mx-2"
+                                               href="{{ path('app_meeting_room', {'roomId': meeting.roomId}) }}">
+                                                Join Room</a>
                                         </div>
 
                                     </div>
+
                                 </div>
+
                             </div>
-                        </div>
-                        <div class="col-lg-12 mb-5">
-                            <div class="main-button-red">
-                                <a href="{{ path('app_meeting_index') }}">Back To Meetings List</a>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+
+
     </section>
 
 

@@ -35,12 +35,14 @@
                             <div class="col-md-4">
                                 <div class="col-md-11 templatemo-item-col all ">
                                     <div class="meeting-item">
-                                        <div class="thumb">
+                                        <div class="thumb top-bg">
                                             <div class="price">
                                                 <span>to fill</span>
                                             </div>
-                                            <a href="meeting-details.html"><img
-                                                        src="assets/images/meeting-04.jpg" alt=""></a>
+                                            <a href="meeting-details.html">
+                                                <img src="{{ vich_uploader_asset( meeting ) }}" alt="Profile Image">
+
+                                            </a>
                                         </div>
                                         <div class="down-content">
                                             <a class="title" href="meeting-details.html"
@@ -90,25 +92,25 @@
                                                         {% set descriptionWords = meeting.description|split(' ') %}
 
                                                         {# Iterate over the first 5 words and display them #}
-                                                        {% for word in descriptionWords|slice(0, 10) %}
+                                                        {% for word in descriptionWords|slice(0, 9) %}
                                                             {{ word }}
                                                             {% if not loop.last %} {# Add a space after each word, except the last one #} {% endif %}
                                                         {% endfor %}
 
                                                         {# If there are more than 5 words, add an ellipsis #}
-                                                        {% if descriptionWords|length > 10 %} .. {% endif %}
+                                                        {% if descriptionWords|length > 9 %} .. {% endif %}
                                                     </div>
                                                 </div>
 
 
-                                                <button class="btn custom-btn1 mt-4"
-                                                        (click)="redirectToDetails(meeting.roomId)">
+                                                <a class="btn custom-btn1 mt-4" href="{{ path('app_meeting_show', {'id': meeting.id}) }}">
                                                     Show meet details
-                                                </button>
+                                                </a>
                                                 <!--                        todo: add if meeting.datetime - 2 hours the link available, else the button disabled and write under it : joining will be available 2 hours before the meet-->
-                                                <button class="btn custom-btn1 mt-2"
-                                                        (click)="redirectToRoom(meeting.roomId)">Join Room
-                                                </button>
+                                                <a class="btn custom-btn1 mt-4" href="{{ path('app_meeting_room', {'roomId': meeting.roomId}) }}">
+                                                    Join Room
+
+                                                </a>
 
 
                                             </div>
