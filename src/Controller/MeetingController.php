@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Enum\MeetingStatus;
 use App\Entity\Meeting;
 use App\Form\MeetingType;
 use App\Repository\MeetingRepository;
@@ -19,6 +20,16 @@ class MeetingController extends AbstractController
     {
         return $this->render('meeting/index.html.twig', [
             'meetings' => $meetingRepository->findAll(),
+        ]);
+    }
+
+    #[Route('/public-meetings', name: 'app_meeting_public', methods: ['GET'])]
+    public function publicMeetings(MeetingRepository $meetingRepository): Response
+    {
+        $meetings = $meetingRepository->findBy(['isPublic' => true]);
+
+        return $this->render('meeting/public_meeting.html.twig', [
+            'meetings' => $meetings,
         ]);
     }
 

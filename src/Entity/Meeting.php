@@ -26,8 +26,8 @@ class Meeting
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $dateTime = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $status = null;
+    #[ORM\Column]
+    private ?bool $isPublic = null;
 
     public function getId(): ?int
     {
@@ -82,14 +82,15 @@ class Meeting
         return $this;
     }
 
-    public function getStatus(): ?string
+
+    public function isIsPublic(): ?bool
     {
-        return $this->status;
+        return $this->isPublic;
     }
 
-    public function setStatus(string $status): static
+    public function setIsPublic(bool $isPublic): static
     {
-        $this->status = $status;
+        $this->isPublic = $isPublic;
 
         return $this;
     }

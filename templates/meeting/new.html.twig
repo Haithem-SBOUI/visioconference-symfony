@@ -3,50 +3,24 @@
 {% block title %}New Meeting{% endblock %}
 
 {% block body %}
-    <h1>Create new Meeting</h1>
+    {% include 'shared/navbar.html.twig' %}
+
 
 
 
 
     <section class="meetings-page" id="meetings">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="row">
-                        {#                        filter #}
-                        <div class="col-lg-12">
-                            <div class="filters">
-                                <ul>
-                                    <li data-filter="*" class="active">All Meetings</li>
-                                    <li data-filter=".soon">Soon</li>
-                                    <li data-filter=".imp">Important</li>
-                                    <li data-filter=".att">Attractive</li>
-                                </ul>
-                            </div>
-                        </div>
-
-                        <!--create meeting -->
-                        <div class="col-md-9 card custom-card1 shadow bg-body-tertiary p-3 me-5 mb-5">
-                            <div class="card-body">
-                                <h2 class="text-center mb-5">Create Meeting</h2>
-                                    <!--          title-->
-                                    {{ include('meeting/_form.html.twig') }}
-
-                                    <a href="{{ path('app_meeting_index') }}">back to list</a>
-
-
-
-
-                            </div>
-                        </div>
-
-
-                    </div>
-
-
+        <div class="container d-flex justify-content-center">
+            <!--create meeting -->
+            <div class="col-md-6 card shadow bg-body-tertiary p-3 me-5 mb-5">
+                <div class="card-body ">
+                    <h2 class="mb-5">Create Meeting</h2>
+                    <!-- title -->
+                    {{ include('meeting/_form.html.twig') }}
+                    <a href="{{ path('app_meeting_index') }}">back to list</a>
                 </div>
             </div>
-
         </div>
     </section>
+
 {% endblock %}
