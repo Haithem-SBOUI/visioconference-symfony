@@ -16,7 +16,7 @@ class MeetingType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('roomId')
+//            ->add('roomId')
             ->add('title')
             ->add('description')
             ->add('dateTime')

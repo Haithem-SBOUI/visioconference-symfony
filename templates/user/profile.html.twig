@@ -102,7 +102,7 @@
     <div class="wrapper" style="background-color: #F0F2F5;">
         <div class="profile-card">
             <div class="profile-card__img">
-                <img src="https://res.cloudinary.com/muhammederdem/image/upload/v1537638518/Ba%C5%9Fl%C4%B1ks%C4%B1z-1.jpg"
+                <img src="{{ vich_uploader_asset(app.user, 'imageFile') }}"
                      alt="profile card">
             </div>
             <div class="custom-card-body">
@@ -119,11 +119,10 @@
 
                 {# Add more fields as needed #}
 {#complete customize buton#}
-                <div></div>
-                <a href="{{ path('app_user_edit') }}" class="btn custom-btn1 mx-auto w-75">Edit Profile</a>
-
-                <div class="border border-top">
+                <div class="col-md-6 mx-auto">
+                <a href="{{ path('app_user_edit') }}" class="btn custom-btn1 mx-auto ">Edit Profile</a>
                 </div>
+
             </div>
 
         </div>

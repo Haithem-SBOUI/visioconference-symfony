@@ -50,18 +50,20 @@ class UserController extends AbstractController
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted()) {
             $entityManager->persist($user);
             $entityManager->flush();
 
+            // Redirect to the profile page after successful form submission
+            return $this->redirectToRoute('app_user_profile');
         }
 
+        // Render the form page with potential errors
         return $this->render('user/update-info.html.twig', [
             'user' => $user,
             'form' => $form,
         ]);
     }
-
     #[Route('/profile', name: 'app_user_profile')]
     public function userProfile(): Response
     {
@@ -104,7 +106,7 @@ class UserController extends AbstractController
     #[Route('/{id}', name: 'app_user_delete', methods: ['POST'])]
     public function delete(Request $request, User $user, EntityManagerInterface $entityManager): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$user->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $user->getId(), $request->request->get('_token'))) {
             $entityManager->remove($user);
             $entityManager->flush();
         }
