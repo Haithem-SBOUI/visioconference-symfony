@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Welcome!{% endblock %}</title>
+    <link rel="icon"
+          href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
+    {% block stylesheets %}
+{#        <link rel="stylesheet" href="{{ asset('styles/app.css') }}">#}
+
+        {#            personalized css #}
+        <link rel="stylesheet" href="{{ asset('styles/my.css') }}">
+
+
+        <link rel="stylesheet" href="{{ asset('styles/css/fontawesome.css') }}">
+
+        <link rel="stylesheet" href="{{ asset('styles/css/templatemo-edu-meeting.css') }}">
+        <link rel="stylesheet" href="{{ asset('styles/css/owl.css') }}">
+        <link rel="stylesheet" href="{{ asset('styles/css/lightbox.css') }}">
+
+        <!--admin-->
+        <link rel="stylesheet" href="{{ asset('styles/admin/css/vendor.css') }}">
+        <link rel="stylesheet" href="{{ asset('styles/admin/bootstrap/css/bootstrap.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('styles/admin/fonts/fontawesome-all.min.css') }}">
+
+
+
+    {% endblock %}
+
+    {% block javascripts %}
+        {{ importmap() }}
+    {% endblock %}
+</head>
+<body>
+{% block body %}{% endblock %}
+<!-- Scripts -->
+
+<link rel="stylesheet" href="{{ asset('styles/admin/css/vendor.css') }}">
+
+<!-- Bootstrap core JavaScript -->
+<script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
+
+<!--admin-->
+<script src="{{ asset('js/bs-init.js') }}"></script>
+<script src="{{ asset('js/theme.js') }}"></script>
+<script src="{{ asset('bootstrap/js/bootstrap.min.js') }}"></script>
+
+
+<script src="{{ asset('js/isotope.min.js') }}"></script>
+<script src="{{ asset('js/owl-carousel.js') }}"></script>
+
+<script src="{{ asset('js/isotope.min.js') }}"></script>
+
+<script src="{{ asset('js/lightbox.js') }}"></script>
+
+<script src="{{ asset('js/tabs.js') }}"></script>
+
+<script src="{{ asset('js/video.js') }}"></script>
+
+<script src="{{ asset('js/slick-slider.js') }}"></script>
+
+<script src="{{ asset('js/custom.js') }}"></script>
+
+<!--  <script src="https://cdn.jsdelivr.net/npm/iconify-icon@1.0.7/dist/iconify-icon.min.js"></script>-->
+<!--  <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>-->
+<script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
+
+
+<script src="//code.jquery.com/jquery-1.12.4.js"></script>
+<script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+</body>
+</html>

@@ -1,0 +1,113 @@
+:root {
+    --main-color: #A32C30;
+    --second-color: rgb(32, 38, 44);
+    --btn1-color: #A32C30;
+    --btn2-color: rgb(245, 164, 37);
+}
+
+
+.custom-btn1 {
+    background-color: var(--btn1-color) !important;
+    color: white !important;
+    width: 100% !important;
+}
+
+.custom-btn1:hover {
+    background-color: var(--btn1-color) !important;
+    opacity: 0.9 !important;
+    color: white !important;
+}
+
+.custom-btn2 {
+    background-color: var(--btn2-color) !important;
+    color: white !important;
+    width: 100% !important;
+}
+
+.custom-btn2:hover {
+    background-color: var(--btn2-color);
+    opacity: 0.9;
+    color: white;
+}
+
+.custom-card1 {
+    border-bottom: var(--btn1-color) 4px solid;
+    border-top: var(--btn1-color) 4px solid;
+}
+
+.custom-card2 {
+    border-bottom: var(--btn2-color) 4px solid;
+    border-top: var(--btn2-color) 4px solid;
+}
+
+.custom-card1 {
+    border-bottom: var(--btn1-color) 4px solid;
+    border-top: var(--btn1-color) 4px solid;
+}
+
+.custom-card2 {
+    border-bottom: var(--btn2-color) 4px solid;
+    border-top: var(--btn2-color) 4px solid;
+}
+
+.custom-color-1 {
+    color: var(--main-color)!important;
+}
+.custom-color-2 {
+    color: var(--btn2-color)!important;
+}
+
+.custom-bg-color-1 {
+    background-color: var(--main-color)!important;
+    border-color: var(--main-color)!important;
+
+}
+
+html {
+    background-color: #F0F2F5;
+}
+.section1 {
+    background-image: url(assets/imgs/bg1.jpg);
+    background-position: center center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+
+section.apply-now {
+    background-image: url(assets/imgs/bg5.jpg)!important;
+}
+section.our-facts {
+    background-image: url(assets/imgs/bg4.jpg) !important;
+}
+
+.card-header {
+    color: black;
+    font-weight: bold;
+
+}
+
+
+.mt-7 {
+    margin-top: 7%;
+}
+@media (max-width: 767px) {
+    .mt-7 {
+        margin-top: 25%;
+    }
+}
+
+
+a {
+    color: #2a2a2a;
+}
+
+.top-bg {
+    border-top-left-radius: 10%;
+    border-top-right-radius: 10%;
+    background-color: var(--main-color);
+}
+
+
+
