@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Enum\MeetingStatus;
 use App\Entity\Meeting;
 use App\Form\MeetingType;
+use App\Form\RoomFormType;
 use App\Repository\MeetingRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -32,6 +33,27 @@ class MeetingController extends AbstractController
         ]);
     }
 
+    #[Route('/join-with-roomId', name: 'app_meeting_join', methods: ['GET'])]
+    public function joinMeeting(Request $request, EntityManagerInterface $entityManager,): Response
+    {
+        $roomId = '';
+
+        $form = $this->createForm(RoomFormType::class, ['roomId' => $roomId]);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            // Redirect to the meeting room using the provided room ID
+            $data = $form->getData();
+
+
+            return $this->redirectToRoute('app_meeting_room', ['roomId' => $data->getRoomId()]);
+        }
+
+        return $this->render('meeting/join-with-roomId.html.twig', [
+            'form' => $form->createView(),
+        ]);
+    }
+
     #[Route('/new', name: 'app_meeting_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
@@ -41,6 +63,8 @@ class MeetingController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $meeting->setUser($this->getUser());
+            $meeting->setRoomId($this->generateRandomString());
+
             $entityManager->persist($meeting);
             $entityManager->flush();
 
@@ -52,6 +76,20 @@ class MeetingController extends AbstractController
             'form' => $form,
         ]);
     }
+
+
+    public function generateRandomString($length = 5): string
+    {
+        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $randomString = '';
+
+        for ($i = 0; $i < $length; $i++) {
+            $randomString .= $characters[rand(0, strlen($characters) - 1)];
+        }
+
+        return $randomString;
+    }
+
 
     #[Route('/{id}', name: 'app_meeting_show', methods: ['GET'])]
     public function show(Meeting $meeting): Response
