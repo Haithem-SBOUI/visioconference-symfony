@@ -2,43 +2,41 @@
 
 namespace App\Form;
 
-use App\Entity\Meeting;
+use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
-use Symfony\Component\Form\Extension\Core\Type\RadioType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Vich\UploaderBundle\Form\Type\VichImageType;
 
-class MeetingType extends AbstractType
+class UserType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('roomId')
-            ->add('title')
-            ->add('description')
-            ->add('dateTime')
-
+            ->add('email')
+            ->add('username')
+            ->add('firstname')
+            ->add('lastname')
             ->add('imageFile', VichImageType::class, [
-                'label' => 'meeting uploaded image',
+                'label' => 'User uploaded image',
                 'label_attr' => [
                     'class' => 'form-label mt-4'
                 ]
             ])
-            ->add('isPublic', CheckboxType::class)
             ->add('save', SubmitType::class, [
                 'label' => 'Save',
                 'attr' => ['class' => 'btn custom-btn1'], // Add your custom classes here
             ]);
+//            ->add('password')
+//            ->add('roles')
         ;
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => Meeting::class,
+            'data_class' => User::class,
         ]);
     }
 }
