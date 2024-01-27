@@ -24,9 +24,9 @@
                 <ul class="navbar-nav ms-auto pe-3">
                     <li class="nav-item d-lg-none mb-3">
                         <!-- Show this on small screens only -->
-                        {% if is_granted('ROLE_USER') and app.user is not null %}
+
                             <a class="nav-link dropdown-toggle" aria-expanded="false" data-bs-toggle="dropdown" href="#">
-                                <img class="border rounded-circle img-profile" src="/assets/admin/img/avatars/avatar1.jpeg">
+                                <img style="max-height: 35px; max-width: 35px" class="border rounded-circle img-profile" src="{{ vich_uploader_asset(app.user, 'imageFile') }}" alt="Profile Image">
                                 <span class="d-inline me-2 small">{{ app.user.username }}</span>
                             </a>
                             <div class="dropdown-menu  animated--grow-in">
@@ -36,13 +36,14 @@
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="#"><i class="fas fa-sign-out-alt fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Logout</a>
                             </div>
-                        {% endif %}
+
                     </li>
 
 
 
                     <li class="nav-item">
                         <a class="nav-link active px-3 active" aria-current="page" href="{{ path('home') }}">Home</a>
+
                     </li>
                     {% if is_granted('ROLE_USER') %}
                         <li class="nav-item">
@@ -69,6 +70,8 @@
                         <!-- Hide the dropdown menu on small screens -->
                         <div class="dropdown">
                             <a class="nav-link dropdown-toggle" href="#" onclick="toggleDropdown()" role="button">
+                                <span class="d-inline me-2 small">{{ app.user.username }}</span>
+                                <img style="max-height: 35px; max-width: 35px" class="border rounded-circle img-profile" src="{{ vich_uploader_asset(app.user, 'imageFile') }}" alt="Profile Image">
                             </a>
                             <div class="dropdown-menu shadow dropdown-menu-end animated--grow-in" id="userDropdown">
                                 <a class="dropdown-item" href="/profile"><i class="fas fa-user fa-sm fa-fw me-2 "></i>&nbsp;Profile</a>
@@ -89,7 +92,7 @@
                             }
 
                             window.onclick = function (event) {
-                                if (!event.target.matches('.dropdown-toggle')) {
+                                if (!event.target.matches('.dropdown-toggle') && !event.target.matches('.img-profile') && !event.target.matches('.small')) {
                                     var dropdowns = document.getElementsByClassName("dropdown-menu");
                                     for (var i = 0; i < dropdowns.length; i++) {
                                         var openDropdown = dropdowns[i];

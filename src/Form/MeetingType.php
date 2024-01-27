@@ -8,6 +8,7 @@ use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\RadioType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Vich\UploaderBundle\Form\Type\VichImageType;
 
 class MeetingType extends AbstractType
 {
@@ -18,6 +19,14 @@ class MeetingType extends AbstractType
             ->add('title')
             ->add('description')
             ->add('dateTime')
+
+            ->add('imageFile', VichImageType::class, [
+                'label' => 'meeting uploaded image',
+                'label_attr' => [
+                    'class' => 'form-label mt-4'
+                ]
+            ])
+
             ->add('isPublic', CheckboxType::class)
         ;
     }

@@ -35,12 +35,14 @@
                             <div class="col-md-4">
                                 <div class="col-md-11 templatemo-item-col all ">
                                     <div class="meeting-item">
-                                        <div class="thumb">
+                                        <div class="thumb top-bg">
                                             <div class="price">
                                                 <span>to fill</span>
                                             </div>
-                                            <a href="meeting-details.html"><img
-                                                        src="assets/images/meeting-04.jpg" alt=""></a>
+                                            <a href="meeting-details.html">
+                                                <img src="{{ vich_uploader_asset( meeting ) }}" alt="Profile Image">
+
+                                            </a>
                                         </div>
                                         <div class="down-content">
                                             <a class="title" href="meeting-details.html"
@@ -90,13 +92,13 @@
                                                         {% set descriptionWords = meeting.description|split(' ') %}
 
                                                         {# Iterate over the first 5 words and display them #}
-                                                        {% for word in descriptionWords|slice(0, 10) %}
+                                                        {% for word in descriptionWords|slice(0, 9) %}
                                                             {{ word }}
                                                             {% if not loop.last %} {# Add a space after each word, except the last one #} {% endif %}
                                                         {% endfor %}
 
                                                         {# If there are more than 5 words, add an ellipsis #}
-                                                        {% if descriptionWords|length > 10 %} .. {% endif %}
+                                                        {% if descriptionWords|length > 9 %} .. {% endif %}
                                                     </div>
                                                 </div>
 

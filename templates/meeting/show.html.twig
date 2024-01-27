@@ -30,7 +30,8 @@
                                     <div class="date">
                                         <h6>Nov <span>12</span></h6>
                                     </div>
-                                    <a href="meeting-details.html"><img src="assets/imgs/bg1.jpg" alt=""></a>
+                                    <a href="meeting-details.html">
+                                        <img src="{{ vich_uploader_asset( meeting, 'fileName') }}" alt="Profile Image">
                                 </div>
                                 <div class="down-content">
                                     <a href="meeting-details.html"><h4>{{ meeting.title }}</h4></a>
